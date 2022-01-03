@@ -25,19 +25,26 @@ class Solution {
    
     
     public int numSquares(int n) {
-       
         int dp[] = new int[n+1];
-        Arrays.fill(dp,-1);
+        // Arrays.fill(dp,-1);
+        // int ans =  num(n,dp);
+        // return ans;
         
+        dp[0] = 0;
         
+        for(int i = 1; i <=n; i++){
+            
+            int myans = Integer.MAX_VALUE;
+            for(int j = 1; j*j <= i; j++){
+                
+                myans = Math.min(myans,dp[i-(j*j)]);
+                
+            }
+            dp[i] = myans + 1;
+            
+        }
         
-        int ans =  num(n,dp);
-        
-        // for(int i = 0; i < dp.length; i++){
-        //     System.out.print(dp[i]+" ");
-        // }
-        return ans;
-        
+        return dp[n];
         
     }
 }
