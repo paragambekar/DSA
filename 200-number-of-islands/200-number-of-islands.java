@@ -29,12 +29,12 @@ class Solution {
         Queue<Pair> q = new LinkedList<>();
         
         q.add(new Pair(i,j));
-        visited[i][j] = true;
+        // visited[i][j] = true;
         
         while(!q.isEmpty()){
             
             Pair front = q.poll();
-            visited[front.row][front.col] = true;
+            // visited[front.row][front.col] = true;
             
                 for(int k = 0; k < 4; k++){
                 int nr = front.row + dr[k];
@@ -68,6 +68,7 @@ class Solution {
             for(int j = 0; j < n; j++){
                 
                 if(grid[i][j] == '1' && visited[i][j] == false){
+                    visited[i][j] = true;
                     islandbfs(grid,i,j,visited);
                     islands++; 
                 }
