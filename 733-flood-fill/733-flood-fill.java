@@ -1,57 +1,35 @@
-class Pair{
-    int row;
-    int col;
-    
-    public Pair(int row, int col){
-        this.row = row;
-        this.col = col;
-    }
-}
-
 class Solution {
     
-    int dr[] = new int[]{-1,0,1,0};
-    int dc[] = new int[]{0,1,0,-1};
+    int dr[] = new int[]{0,0,1,-1};
+    int dc[] = new int[]{-1,1,0,0};
+    
+    private void flood(int image[][], int sr, int sc, int oldColor, int newColor){
+        
+        if(sr < 0 || sr == image.length || sc < 0 || sc == image[0].length || image[sr][sc] != oldColor){
+            return;
+        }
+        
+        image[sr][sc] = newColor;
+        
+        for(int i = 0; i < 4; i++){
+            int nr = sr + dr[i];
+            int nc = sc + dc[i];
+            
+            flood(image,nr,nc,oldColor,newColor);
+        }
+        
+        
+        
+    }
     
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
         
-        int m = image.length;
-        int n = image[0].length;
+         if (image[sr][sc] == newColor) return image;
         
-    
         int oldColor = image[sr][sc];
-        if(oldColor == newColor){
-            return image;
-        }
         
-        Queue<Pair> q = new LinkedList<>();
+        flood(image,sr,sc,oldColor,newColor);
+        return image;
         
-        q.add(new Pair(sr,sc));
-        
-        while(!q.isEmpty()){
-            
-            Pair front = q.poll();
-            image[front.row][front.col] = newColor;
-            
-            for(int i = 0; i < 4; i++){
-                int nr = front.row + dr[i];
-                int nc = front.col + dc[i];
-                
-                if(isValid(image,oldColor,nr,nc,m,n)){
-                    q.add(new Pair(nr,nc));
-                }
-                
-            }
-            
-        }
-        
-        return image;  
-    }
-    
-    private boolean isValid(int image[][], int oldColor, int nr, int nc, int m, int n){
-        if(nr >=0 && nr < m && nc >=0 && nc < n && image[nr][nc] == oldColor){
-            return true;
-        }
-        return false;
     }
 }
