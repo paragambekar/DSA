@@ -7,8 +7,9 @@ class Solution {
         int profit = 0;
         
         for(int i = n-2; i>=0; i--){
-            profit = Math.max(profit,maxnum-prices[i]);
             maxnum = Math.max(maxnum,prices[i]);
+            profit = Math.max(profit,maxnum-prices[i]);
+            
         }
         
         return profit;
