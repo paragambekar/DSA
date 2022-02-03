@@ -1,6 +1,6 @@
 class Solution {
     
-    private boolean partition(int nums[], int idx, int target,int dp[][]){
+    private boolean partition(int nums[], int idx, int target,Boolean dp[][]){
         
         if(target == 0){
             return true;
@@ -15,12 +15,8 @@ class Solution {
         }
         
         
-        if(dp[idx][target] != -1){
-           if(dp[idx][target] == 0){
-               return false;
-           }else{
-               return true;
-           }
+        if(dp[idx][target] != null){
+           return dp[idx][target];
         }
         
         boolean notTake = partition(nums,idx-1,target,dp);
@@ -28,15 +24,8 @@ class Solution {
         if(nums[idx] <= target){
             take = partition(nums,idx-1,target-nums[idx],dp);  
         }
-        boolean ans = take || notTake;
         
-        if(ans == false){
-            dp[idx][target] = 0;
-        }else{
-            dp[idx][target] = 1;
-        }
-        
-        return ans;
+        return dp[idx][target] = take || notTake;
     }
     
     public boolean canPartition(int[] nums) {
@@ -57,13 +46,13 @@ class Solution {
         int n = target / 2 ;
         // System.out.println(n);
         
-        int dp[][] = new int[m][n+1];
+        Boolean dp[][] = new Boolean[m][n+1];
         
-        for(int i = 0; i < m; i++){
-            for(int j = 0; j <= n; j++){
-                dp[i][j] = -1;
-            }
-        }
+        // for(int i = 0; i < m; i++){
+        //     for(int j = 0; j <= n; j++){
+        //         dp[i][j] = -1;
+        //     }
+        // }
        
         
         return partition(nums,m-1,n,dp);
