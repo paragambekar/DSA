@@ -35,14 +35,22 @@ class Solution{
     
     void helper(ArrayList<Integer> arr, int idx,int sum, ArrayList<Integer> ans){
         
-        if(idx == arr.size()){
-            ans.add(sum);
-            return;
+        // if(idx == arr.size()){
+        //     ans.add(sum);
+        //     return;
+        // }
+        
+        // helper(arr,idx+1,sum+arr.get(idx),ans);
+        
+        // helper(arr,idx+1,sum,ans);
+        
+        ans.add(sum);
+        
+        for(int i = idx; i < arr.size(); i++){
+            
+            helper(arr,i+1,sum+arr.get(i),ans);
+            
         }
-        
-        helper(arr,idx+1,sum+arr.get(idx),ans);
-        
-        helper(arr,idx+1,sum,ans);
         
     }
     
