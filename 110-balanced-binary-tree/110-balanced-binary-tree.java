@@ -13,31 +13,57 @@
  *     }
  * }
  */
+
+class Pair{
+    int height;
+    boolean isBal;
+    
+    Pair(int height, boolean isBal){
+        this.height = height;
+        this.isBal = isBal;
+    }
+}
+
 class Solution {
     
-    public int height(TreeNode root){
-        if(root == null) return 0;
+    public Pair isBalHelper(TreeNode root){
         
-        int left = height(root.left);
-        int right = height(root.right);
-        return Math.max(left,right) + 1;
+        if(root == null){
+            Pair ans = new Pair(0,true);
+            return ans;
+        }
+        
+        Pair left = isBalHelper(root.left);
+        Pair right = isBalHelper(root.right);
+        
+        boolean balanced = true;
+        
+        if(Math.abs(left.height - right.height) > 1){
+            balanced  = false;
+        }
+        
+        balanced = balanced && left.isBal && right.isBal;
+        
+        int height = Math.max(left.height,right.height) + 1;
+        
+        return (new Pair(height,balanced));
+        
     }
     
     public boolean isBalanced(TreeNode root) {
         
-        if(root == null) return true;
-        
-        int leftHeight = height(root.left);
-        int rightHeight = height(root.right);
-        
-        if(Math.abs(leftHeight - rightHeight) > 1) return false;
-        
-        boolean left = isBalanced(root.left);
-        boolean right = isBalanced(root.right);
-        
-        return left && right;
-        
-        
+        Pair ans = isBalHelper(root);
+        return ans.isBal;
         
     }
 }
+
+
+
+
+
+
+
+
+
+
