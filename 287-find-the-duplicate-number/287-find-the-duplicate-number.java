@@ -10,10 +10,6 @@ class Solution {
             
             if(farr[nums[i]] == 2) return nums[i];
         }
-        
-        for(int i = 0; i < farr.length; i++){
-            System.out.println(farr[i]+" ");
-        }
         return -1;
     }
 }
