@@ -1,33 +1,25 @@
 class Solution {
-    
-    public boolean isValid(int grid[][], int i, int j){
-        
-        int n = grid.length;
-        int m = grid[0].length;
-        
-        if(i < 0 || i >= n || j < 0 || j >= m) return false;
-        
-        return true;
-        
-    }
-    
     public boolean searchMatrix(int[][] matrix, int target) {
         
-        int i = matrix.length-1;
-        int j = 0;
+        int m = matrix.length;
+        int n = matrix[0].length;
         
-        while(isValid(matrix,i,j)){
+        int low = 0;
+        int high = m*n-1;
+        
+        while(low <= high){
             
-            if(matrix[i][j] == target) return true;
+            int mid = low + (high-low)/2;
             
-            if(matrix[i][j] > target){
-                i--;
+            if(matrix[mid/n][mid%n] == target) return true;
+            
+            if(matrix[mid/n][mid%n] < target){
+                low = mid+1;
             }else{
-                j++;
+                high = mid-1;
             }
             
         }
-        
         return false;
         
     }
