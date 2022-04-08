@@ -8,19 +8,17 @@ class Solution {
             
             int mid = start + (end-start)/2;
             
-            // for sorted array
-            if(nums[start] <= nums[mid] && nums[end] >= nums[mid]){
-                return nums[start];
-            }else if(nums[start] >= nums[mid] && nums[mid] <= nums[end]){
+            if(nums[mid] >= nums[start] && nums[mid] <= nums[end]) return nums[start];
+            
+            if(nums[mid] < nums[end]){
                 end = mid;
             }else{
-                start = mid+1;
+                start = mid +1;
             }
             
-            
         }
-                                 
-         return -1;                        
+        
+        return -1;
         
     }
 }
