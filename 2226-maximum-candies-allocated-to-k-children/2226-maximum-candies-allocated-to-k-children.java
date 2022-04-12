@@ -1,10 +1,7 @@
 class Solution {
     public int maximumCandies(int[] candies, long k) {
         
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        for(int i = 0; i < candies.length; i++){
-            pq.add(candies[i]);
-        }
+        
         Arrays.sort(candies);
         int start = 1;
         int end = candies[candies.length-1];
@@ -16,6 +13,7 @@ class Solution {
             int mid = start + (end-start)/2;    
             
             long children = k;
+            
             for(int i = 0; i < candies.length; i++){
                 
                 if(candies[i]-mid >= 0) children--;
@@ -32,9 +30,7 @@ class Solution {
             }else{
                 end = mid - 1;
             }
-            
-            
-            
+               
             
         }
         
