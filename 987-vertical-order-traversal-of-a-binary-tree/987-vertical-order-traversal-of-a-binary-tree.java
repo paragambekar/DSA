@@ -64,13 +64,28 @@ class Solution {
         }
         
         List<List<Integer>> list = new ArrayList<>();
-        for (TreeMap<Integer, PriorityQueue<Integer>> ys : map.values()) {
-            list.add(new ArrayList<>());
-            for (PriorityQueue<Integer> nodes : ys.values()) {
-                while (!nodes.isEmpty()) {
-                    list.get(list.size() - 1).add(nodes.poll());
+        // for (TreeMap<Integer, PriorityQueue<Integer>> ys : map.values()) {
+        //     list.add(new ArrayList<>());
+        //     for (PriorityQueue<Integer> nodes : ys.values()) {
+        //         while (!nodes.isEmpty()) {
+        //             list.get(list.size() - 1).add(nodes.poll());
+        //         }
+        //     }
+        // }
+        
+        for(int mapkey : map.keySet()){
+            
+            List<Integer> subList = new ArrayList<>();
+            for(int key : map.get(mapkey).keySet()){
+                
+                while(!(map.get(mapkey).get(key)).isEmpty()){
+                    subList.add(map.get(mapkey).get(key).poll());
                 }
+                
             }
+            
+            list.add(subList);
+            
         }
         return list;
         
