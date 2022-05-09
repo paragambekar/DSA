@@ -1,23 +1,15 @@
 class Solution {
     
-    private int paths(int i, int j, int dp[][]){
+    public int pathsHelper(int m, int n, int dp[][]){
         
-        if(i == 0 && j == 0){
-            return 1;
-        }
+         if(m == 0 && n == 0) return 1;
         
-        if(i < 0 || j < 0){
-            return 0;
-        }
+         if(m < 0 || n < 0) return 0;
         
-        if(dp[i][j] != -1){
-            return dp[i][j];
-        }
+        if(dp[m][n] != -1) return dp[m][n];
         
-        int up = paths(i-1,j,dp);
-        int left = paths(i,j-1,dp);
+        return dp[m][n] = (pathsHelper(m-1,n,dp) + pathsHelper(m,n-1,dp));
         
-        return dp[i][j] = up+left;
         
     }
     
@@ -29,8 +21,6 @@ class Solution {
                 dp[i][j] = -1;
             }
         }
-        
-        return paths(m-1,n-1,dp);
-        
+        return pathsHelper(m-1,n-1,dp);        
     }
 }
