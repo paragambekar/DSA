@@ -1,15 +1,12 @@
 class Solution {
-
     
-    public int cherry(int grid[][], int i, int j1, int j2,int dp[][][]){
+    public int cherry(int i, int j1, int j2, int grid[][], int dp[][][]){
         
-        int m = grid[0].length;
-        int n = grid.length;
-        if(j1 < 0 || j1 >= m || j2 < 0 || j2 >= m){
+        if(j1 < 0 || j1 >= grid[0].length || j2 < 0 || j2 >= grid[0].length){
             return -999;
         }
         
-        if(i == n-1){
+        if(i == grid.length - 1){
             if(j1 == j2){
                 return grid[i][j1];
             }else{
@@ -17,51 +14,44 @@ class Solution {
             }
         }
         
-        if(dp[i][j1][j2] != -1){
-            return dp[i][j1][j2];
-        }
+        if(dp[i][j1][j2] != -1) return dp[i][j1][j2];
         
-        int maxi = -999;
-        
-        for(int dj1 = -1; dj1 <= 1; dj1++){
-            for(int dj2 = -1; dj2 <=1; dj2++){
+        int ans = Integer.MIN_VALUE;
+        for(int m = -1; m <=1; m++){
+            for(int n = -1; n <= 1; n++){
                 
-                int c1 = j1+dj1;
-                int c2 = j2+dj2;
-                
-               int value = 0;
-                if(j1 == j2){
-                    value += grid[i][j1];
-                }else{
-                    value += grid[i][j1] + grid[i][j2];
-                }
-                
-                value += cherry(grid,i+1,c1,c2,dp);
-                
-                maxi = Math.max(maxi,value);
+                int cherries = cherry(i+1, j1+m, j2+n, grid,dp);
+                ans = Math.max(ans, cherries);
                 
             }
         }
         
-        return dp[i][j1][j2] = maxi;
+        if(j1 == j2){
+                return dp[i][j1][j2] = grid[i][j1] + ans;
+            }else{
+                return dp[i][j1][j2] = grid[i][j1] + grid[i][j2] + ans;
+            }
+        
+        
         
         
     }
     
     public int cherryPickup(int[][] grid) {
         
-        int n = grid.length;
-        int m = grid[0].length;
+        int m  = grid.length;
+        int n = grid[0].length;
         
-        int dp[][][] = new int[n][m][m];
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < m; j++){
-                for(int k = 0; k < m; k++){
+        int dp[][][] = new int[m][n][n];
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                for(int k = 0; k < n; k++){
                     dp[i][j][k] = -1;
                 }
             }
         }
         
-        return cherry(grid,0,0,grid[0].length-1,dp);
+        return cherry(0, 0, n-1, grid,dp);
+        
     }
 }
