@@ -30,11 +30,38 @@ class Solution {
         int n  = coins.length;
         int dp[][] = new int[n][amount+1];
         
-        for(int row[] : dp){
-            Arrays.fill(row,-1);
+        
+        for(int i = 0; i <= amount; i++){
+            if((i % coins[0]) == 0 || i == 0){
+                dp[0][i] = 1;
+            }
         }
         
-        return solve(coins,coins.length-1,amount,dp);
+        for(int idx = 1; idx < n ;idx++){
+            
+            for(int amt = 0; amt <=amount; amt++){
+                
+                int notTake = dp[idx-1][amt];
+        
+                int take = 0;
+                if(coins[idx] <= amt){
+                    take = dp[idx][amt-coins[idx]];
+                }
+
+                dp[idx][amt] = notTake + take;
+                
+            }
+            
+        }
+        
+        return dp[n-1][amount];
+        
+        
+        // for(int row[] : dp){
+        //     Arrays.fill(row,-1);
+        // }
+        
+        // return solve(coins,coins.length-1,amount,dp);
         
     }
 }
