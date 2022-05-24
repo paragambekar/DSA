@@ -43,7 +43,7 @@ class Solution {
         
         for(int buy = 0; buy <= 1; buy++){
             for(int cap = 0; cap <=2; cap++){
-                dp[0][buy][cap] = 0;
+                dp[n][buy][cap] = 0;
             }
         }
         
