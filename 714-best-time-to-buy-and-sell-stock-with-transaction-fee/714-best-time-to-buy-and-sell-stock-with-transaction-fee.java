@@ -17,33 +17,37 @@ class Solution {
     public int maxProfit(int[] prices, int fee) {
         
         int n = prices.length;
-        int dp[][] = new int [n+1][2];
+        // int dp[][] = new int [n+1][2];
         // for(int row[]: dp){
         //     Arrays.fill(row,-1);
         // }
+        
+        int after[] = new int[2];
+        int curr[] = new int[2];
         
         for(int idx = n-1; idx >=0; idx--){
             for(int buy = 0; buy <= 1; buy++){
                 
                 if(buy == 1){
                     
-                    int take = -prices[idx] + dp[idx+1][0];
-                    int notTake = 0 + dp[idx+1][1];
+                    int take = -prices[idx] + after[0];
+                    int notTake = 0 + after[1];
                     
-                    dp[idx][buy] = Math.max(take,notTake);
+                    curr[buy] = Math.max(take,notTake);
                     
                 }else{
                     
-                    int sell = (prices[idx]-fee) + dp[idx+1][1];
-                    int notSell = 0 + dp[idx+1][0];
+                    int sell = (prices[idx]-fee) + after[1];
+                    int notSell = 0 + after[0];
                     
-                    dp[idx][buy] = Math.max(sell,notSell);
+                    curr[buy] = Math.max(sell,notSell);
                     
                 }
             }
+            after = curr;
         }
         
-        return dp[0][1];
+        return after[1];
         
         
         // return profit(0,1,fee,prices,dp);
