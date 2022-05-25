@@ -22,12 +22,28 @@ class Solution {
         if(nums.length == 1) return 1;
         
         int n = nums.length;
-        int dp[][] = new int[n][n+1];
-        for(int row[] : dp){
-            Arrays.fill(row,-1);
+        int dp[][] = new int[n+1][n+1];
+        
+        for(int idx = n-1; idx >= 0; idx--){
+            
+            for(int last = idx-1; last >= -1; last--){
+                
+                int include = 0;
+                if(last == -1 || nums[idx] > nums[last]){
+                    include = 1 + dp[idx+1][idx+1];
+                }
+
+                int exclude = dp[idx+1][last+1];
+
+                dp[idx][last+1] = Math.max(include,exclude);
+                
+            }
+            
         }
         
-        return lis(0,-1,nums,dp);
+        
+        return dp[0][0];
+        // return lis(0,-1,nums,dp);
         
     }
 }
