@@ -2,7 +2,6 @@ class Solution {
     
     public String superString(String s1, String s2, String lcs){
         
-        System.out.println(s1+" "+s2+" "+lcs);
         int n = s1.length();
         int m = s2.length();
         
@@ -35,16 +34,6 @@ class Solution {
         
         return ans;
         
-//         while(true){
-//            if((s1.charAt(i) == s2.charAt(j)) && (s1.charAt(i) || s2.charAt(j) == lcs.charAt(k)){
-               
-//            }
-//         }
-        
-//         (s1.charAt(i) == s2.charAt(j));
-        
-//         (s1.charAt(i) || s2.charAt(j) == lcs.charAt(k);
-        
     }
     
     public String shortestCommonSupersequence(String str1, String str2) {
@@ -66,14 +55,7 @@ class Solution {
             }
         }
         
-        for(int i= 0; i < dp.length; i++){
-            for(int j = 0; j < dp[0].length; j++){
-                System.out.print(dp[i][j] + " ");
-            }
-            System.out.println();
-        }
-        
-        System.out.println(dp[n][m]);
+    
         String lcs = "";
         
         
