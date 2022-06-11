@@ -29,11 +29,36 @@ class Solution {
         int n = word1.length();
         int m = word2.length();
         int dp[][] = new int[n+1][m+1];
-        for(int row[] : dp){
-            Arrays.fill(row,-1);
+//         for(int row[] : dp){
+//             Arrays.fill(row,-1);
+//         }
+        
+//         return dist(word1,word2,word1.length(),word2.length(),dp);
+        
+        for(int idx1 = 0; idx1 <= n; idx1++){
+            dp[idx1][0] = idx1;
         }
         
-        return dist(word1,word2,word1.length(),word2.length(),dp);
+        for(int idx2 = 0; idx2 <= m; idx2++){
+            dp[0][idx2] = idx2;
+        }
+        
+        for(int idx1 = 1; idx1 <= n; idx1++){
+            for(int idx2 = 1; idx2 <= m; idx2++){
+                
+               if(word1.charAt(idx1-1) == word2.charAt(idx2-1)){ 
+                   dp[idx1][idx2] = 0 + dp[idx1-1][idx2-1];
+               }else{
+                   int insert = 1 + dp[idx1][idx2-1];
+                   int delete = 1 + dp[idx1-1][idx2];
+                   int replace = 1 + dp[idx1-1][idx2-1];
+                   
+                   dp[idx1][idx2] = Math.min(insert,Math.min(delete,replace));
+               }
+            }
+        }
+        
+        return dp[n][m];
         
     }
 }
