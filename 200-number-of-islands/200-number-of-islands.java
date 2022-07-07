@@ -19,7 +19,7 @@ class Solution {
         int m = grid.length;
         int n = grid[0].length;
         
-        if(i < 0 || i == m || j < 0 || j == n || grid[i][j] == '0'){
+        if(i < 0 || i == m || j < 0 || j == n || grid[i][j] == '0' || visited[i][j] == true){
             return;
         }
         
@@ -29,9 +29,9 @@ class Solution {
             int nr = i + dr[k];
             int nc = j + dc[k];
             
-            if(isValid(grid,nr,nc,visited)){
+            // if(isValid(grid,nr,nc,visited)){
                 dfsisland(grid,nr,nc,visited);
-            }
+            // }
 
         }
         
@@ -53,7 +53,7 @@ class Solution {
             for(int j = 0; j < n; j++){
                 
                 if(grid[i][j] == '1' && visited[i][j] == false){
-                    visited[i][j] = true;
+                    // visited[i][j] = true;
                     dfsisland(grid,i,j,visited);
                     islands++;
                     
